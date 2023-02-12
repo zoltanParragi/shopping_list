@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    box-sizing: border-box;
+    font-family: 'Courgette', cursive;
+}
+
+main {
+    text-align: center;
+}
+
+h1 {
+    margin: 25px 0;
+}
+
+button {
+    padding: 12px 30px;
+    background-color: #BA7145;
+    color: white;
+    border: none;
+    font-family: 'Courgette', cursive;
+    letter-spacing: 2px;
+}
+
+/* messages */
+
+.errormsg, .successmsg{
+    border-radius: 5px;
+    margin: 10px auto;
+    padding: 10px;
+    max-width: 300px;
+}
+.errormsg{
+    border: 2px solid red;
+}
+.successmsg{
+    border: 2px solid green;
+}
+
+/* index.php */
+
+nav {
+    padding: 10px;
+    background: #D3C586;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav>ul {
+    list-style-type: none;
+}
+
+nav>ul>li {
+    display: inline-block;
+}
+
+nav>ul>li>a{
+    padding: 10px;
+    margin: 3px;
+    background-color: rgb(93, 25, 29);
+    color: white;
+    text-decoration: none;
+}
+
+nav>ul>li>a:hover{
+    background-color: rgba(93, 25, 29, 0.7);
+}
+
+#hamburger {
+    display: none;
+}
+
+@media screen and (max-width: 676px) {
+    nav>ul {
+        display: none;
+    }
+    #hamburger {
+        display: block;
+    }   
+}
+
+#mobileMenu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+}
+
+#mobileMenu>div:first-child {
+    padding: 9px 10px 7px 10px;
+    background-color: rgb(93, 25, 29);
+    text-align: right;
+}
+
+#mobileMenu a {
+    display: block;
+    padding: 12px;
+    background-color: rgb(93, 25, 29);
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+
+#mobileMenu div:not(:first-child) {
+    border-top: 1px solid white;
+}
+
+#listItemForm {
+    display: none;
+    position: fixed;
+    width: 280px;
+    border: 1px solid black;
+    top: 30%;
+    left: calc(50% - 140px);
+    padding: 20px;
+    background: white;
+    box-shadow: 5px 10px 8px #888888;
+}
+
+#listItemForm>div {
+    float: right;
+}
+
+
+table {
+    width: 300px;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th{
+    background-color: rgb(36, 36, 36);
+    color: white;
+    font-weight: 100;
+    letter-spacing: 2px;
+    padding: 3px 0;
+}
+
+
+tr:nth-child(odd):not(:first-child) {
+    background: rgb(202, 201, 201);
+}
+
+td {
+    padding: 10px 0;
+}
+
+td:first-child {
+    width: 180px;
+}
+
+td:not(:first-child) {
+    width: 40px;
+}
+
+#delConfirmationPopup{
+    display: none;
+    position: fixed;
+    width: 280px;
+    top: 30%;
+    left: calc(50% - 140px);
+    padding: 20px;
+    background: white;
+    border: 1px solid black;
+    box-shadow: 5px 10px 8px #888888;
+}
+
+#delConfirmationPopup>div {
+    margin: 10px 0 20px 0;
+    color: rgb(93, 25, 29);
+    font-weight: bold;
+}
+
+#delConfirmationPopup>button {
+    background: white;
+    color: black;
+    border: 1px solid black;
+}
+
+/* register.php */
+form {
+    text-align: center;
+}
+form>input {
+    padding: 5px;
+    font-size: 110%;
+    font-family: 'Courgette', cursive;
+}
+form>button {
+    padding: 12px 30px;
+    letter-spacing: 2px;
+}
+
+#listItemForm form>button {
+    background: white;
+    color: black;
+    border: 1px solid black;
+}
+
+
+
+
