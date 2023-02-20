@@ -64,13 +64,13 @@ switch(true) {
 
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Az email cím nem megfelelő.";
-        } /* else {
+        } else {
             $result = mysqli_query($connection, "select id from users where email ='$email'");
             $found = mysqli_num_rows($result);
             if( $found ) {
                 $errors[] = "Az email cím már foglalt.";
             }
-        } */
+        }
 
         $length = mb_strlen(trim($password), 'UTF-8');
         if($length < 4 or $length > 20) {
@@ -83,7 +83,6 @@ switch(true) {
             $_SESSION["flash"]["register"]["post"] = $post;
             $_SESSION["flash"]["register"]["msg"] = ['value' => $errors, 'type' => 'errormsg'];
         } else {
-            
             // data storing in the db
             $password = password_hash($password, PASSWORD_DEFAULT);
             $email = mysqli_real_escape_string($connection, $email);
@@ -96,71 +95,61 @@ switch(true) {
             //http://localhost/full-stack-course/5_php/3_5_account/activate.php?token=$token
             
             mysqli_query($connection, "insert into users (name, email, password, verification_token) values('$name', '$email', '$password', '$token')");
-
+            
             //-- sending email ... ---
             $mail = new PHPMailer(true);
-
             try {
-                //Server settings
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-                $mail->isSMTP();                                            //Send using SMTP
-                $mail->Host       = SMTP_HOST;                     //Set the SMTP server to send through
-                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                $mail->Username   = SMTP_USERNAME;                     //SMTP username
-                $mail->Password   = SMTP_PASSWORD;                               //SMTP password
-                //$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                $mail->Port       = SMTP_PORT;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-                $mail->addCustomHeader(SMTP_HEADER, SMTP_HEADER_VALUE); // adding custom header
-
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                $mail->isSMTP();                                      // Set mailer to use SMTP
+                $mail->Host = SMTP_HOST;  // Specify main and backup SMTP servers
+                $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                $mail->Username = SMTP_USERNAME;                 // SMTP username
+                $mail->Password = SMTP_PASSWORD;                           // SMTP password
+                //$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+                $mail->Port = 587;                                    // TCP port to connect to
                 $mail->CharSet = 'UTF-8';
-                //Recipients
-                $mail->setFrom('info@zoltan.com', 'Feladó: Zoltán');
-                $mail->addAddress($email, $name);     //Add a recipient
-                /* $mail->addAddress('ellen@example.com');               //Name is optional
-                $mail->addReplyTo('info@example.com', 'Information');
-                $mail->addCC('cc@example.com');
-                $mail->addBCC('bcc@example.com');
 
-                //Attachments
-                $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-                $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name */
+                $mail->setFrom( 'zparragi@gmail.com' , 'Parragi Zoltán' );
+                $mail->addAddress($email, $name);     // Add a recipient
+                $mail->isHTML(true);                                  // Set email format to HTML
 
-                //Content
-                $mail->isHTML(true);                                  //Set email format to HTML
                 $mail->Subject = 'Regisztráció visszaigazolás';
                 $mail->Body    = nl2br("Kedves $name!
 
                 ".date('Y.m.d , H:i:s')."-kor, a(z) ".$_SERVER["REMOTE_ADDR"]." IP címről ezzel az email címmel regisztráltak.
 
                 Ha te voltál kattints az alábbi linkre:
-                http://localhost/full-stack-course/5_php/3_5_account/activate.php?token=$token
+                http://localhost/full-stack-course/my_projects/shopping_list/activate.php?token=$token
                 
                 
                 Üdvözlettel
                 
                 Buga Jakab");
-                // http://".$_SERVER["HTTP_HOST"]."/".$_SERVER[....].....
-
                 //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
+             
                 $mail->send();
+   
+                /* if(!$mail->send()) {
+                    exit(print("no"));
+                    //header("Location: login.php");
+                } else {
+                    exit(print("ok"));
+                    //header("Location: index.php");
+                } */
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
-
+            
             //-- sending email end ---
             
             if($err = mysqli_error($connection)){
                 exit($err);
             }
 
-            $_SESSION["flash"]["register"]["msg"] = ['value' => ['Sikeres regisztráció. <br><br> Most már be tudsz lépni.'], 'type' => 'successmsg'];
-
-            /* $_SESSION["flash"]["register"]["msg"] = ['value' => ['Sikeres regisztráció. <br><br> A regisztráció megerősítéséhez kattints az emailben kapott linkre.'], 'type' => 'successmsg']; */
+            $_SESSION["flash"]["register"]["msg"] = ['value' => ['Sikeres regisztráció. <br><br> A regisztráció megerősítéséhez kattints az emailben kapott linkre.'], 'type' => 'successmsg'];
         }
 
         header("location: ".$referrer_page.".php");
-    
     break;
 
     case ($referrer_page === "login"):
@@ -189,7 +178,6 @@ switch(true) {
                     $_SESSION["flash"]["login"]["msg"] = ['value' => ['Hibás belépési adatok.'], 'type' => 'errormsg'];
                     header("location: ".$referrer_page.".php");
                 } else {
-                    /* $_SESSION["flash"]["login"]["msg"] = ['value' => ['Sikeres belépés.'], 'type' => 'successmsg']; */
                     $_SESSION["user"] = $user_in_db;
                     header("location: index.php");
                     exit; // OR return;
