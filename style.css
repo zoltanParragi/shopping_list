@@ -35,7 +35,13 @@ button {
     margin: 10px auto;
     padding: 10px;
     max-width: 300px;
+    text-align: center;
 }
+
+.errormsg>p:nth-child(2), .successmsg>p:nth-child(2){
+    margin-top: 10px;
+}
+
 .errormsg{
     border: 2px solid red;
 }

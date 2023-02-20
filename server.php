@@ -172,18 +172,65 @@ switch(true) {
             if( mysqli_num_rows($user_in_db_row) === 1 ) {
                 $user_in_db = mysqli_fetch_assoc($user_in_db_row);
                 $user_password_in_db = $user_in_db["password"];
+                $is_email_verified = $user_in_db["email_verified_at"] !== null;
                 
                 if( !password_verify( $password , $user_password_in_db )) {
                     $_SESSION["flash"]["login"]["post"] = $post;
                     $_SESSION["flash"]["login"]["msg"] = ['value' => ['Hibás belépési adatok.'], 'type' => 'errormsg'];
                     header("location: ".$referrer_page.".php");
-                } else {
-                    $_SESSION["user"] = $user_in_db;
-                    header("location: index.php");
                     exit; // OR return;
+                } else {
+                    if($is_email_verified) {
+                        $_SESSION["user"] = $user_in_db;
+                        header("location: index.php");
+                        exit; // OR return;
+                    } else {
+                        $_SESSION["flash"]["login"]["post"] = $post;
+                        $_SESSION["flash"]["login"]["msg"] = ['value' => ['Még nem erősítetted meg a regisztrációd. <br><br> A regisztráció megerősítéséhez kattints az e-mailben kapott linkre.'], 'type' => 'errormsg'];
+                        header("location: ".$referrer_page.".php");
+                        exit; // OR return;
+                    }
                 }
             }
         }
+    break;
+
+    case ($referrer_page === "profile"):
+        $errors = Array();
+
+        $length = mb_strlen(trim($name), 'UTF-8');
+        if($length < 4 or $length > 30) {
+            $errors[] = "A név hosszának legalább 4 és legfeljebb 30 karakternek kell lennie.<br>";
+        }
+
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = "Email formátum hiba.<br>";
+        } else {
+            $result = mysqli_query($connection, "select id from users where email ='$email' and id !='".$_SESSION["user"]["id"]."'");
+            $found = mysqli_num_rows($result);
+            if( $found ) {
+                $errors[] = "Az email cím már foglalt.";
+            }
+        }
+
+        if(count($errors) > 0){
+            $_SESSION["flash"]["post"] = $post;
+            $_SESSION["flash"]["msg"] = ['value' => $errors, 'type' => 'errormsg'];
+        } else {
+            $email = mysqli_real_escape_string($connection, $email);
+            $name = mysqli_real_escape_string($connection, $name);
+            
+            mysqli_query($connection, "update users set name='$name', email='$email' where id='".$_SESSION["user"]["id"]."' limit 1");
+
+            if($err = mysqli_error($connection)){
+                exit($err);
+            }
+
+            $_SESSION["flash"]["msg"] = ['value' => ['Sikeres módosítás. :)'], 'type' => 'successmsg'];
+        }
+        
+        header("location: ".$referrer_page.".php");
+        
     break;
 
 }

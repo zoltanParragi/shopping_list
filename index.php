@@ -3,12 +3,6 @@
 
     require('config.php');
 
-    /* if(!isset($_SESSION["user"])) {
-        $_SESSION["flash"]["msg"] = ['value' => ['Az oldal megtekintéséhez belépés szükséges.'], 'type' => 'errormsg'];
-        header("location: login.php");
-        exit;
-    } */
-
     ini_set("display_errors", 1);
     error_reporting(E_ALL);
     /* 
@@ -22,8 +16,6 @@
     } */
     
     $list = mysqli_fetch_all(mysqli_query($connection, "select * from list"));
-    //exit(print_r($list, 1));
-    //exit(print_r($_SESSION["flash"], 1));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,7 +94,6 @@
     </main>
     <footer></footer>
     <script src="script.js"></script>
-
 </body>
 </html>
 <?php unset($_SESSION["flash"]);?>
