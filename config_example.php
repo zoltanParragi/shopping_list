@@ -3,8 +3,6 @@
 define('SMTP_HOST', 'smtphostname');
 define('SMTP_USERNAME', 'username');
 define('SMTP_PASSWORD', 'password');
-define('SMTP_HEADER', 'X-PM-Message-Stream');
-define('SMTP_HEADER_VALUE', 'registration-1');
 define('SMTP_PORT', 587);
 
 define (DB_USER, "user");
