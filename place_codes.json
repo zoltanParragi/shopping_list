@@ -1,0 +1,78 @@
+[
+    {
+        "code": 1,
+        "items": "zöldség, gyülölcs, tojás, gomba"
+    },
+    {
+        "code": 2,
+        "items": "édesség, zabbpehely, kukoricapehely, korpáskeksz"
+    },
+    {
+        "code": 3,
+        "items": "tízóraikeksz, nápolyi, tea, kakaóporok, háztartási keksz, Dörmi"
+    },
+    {
+        "code": 4,
+        "items": "kenyér, zsemle, pogácsa, fánk, rizskorong, Abonett"
+    },
+    {
+        "code": 5,
+        "items": "üdítők, sörök, ásványvizek"
+    },
+    {
+        "code": 6,
+        "items": "ketchup, majonéz, fodros nagykocka, tarhonya, levestészta, savanyúságok"
+    },
+    {
+        "code": 7,
+        "items": "tej, túró, tejföl, kefír, joghurt, tejszelet, túrórudi"
+    },
+    {
+        "code": 8,
+        "items": "margarinok, vaj, zsír, sajtok"
+    },
+    {
+        "code": 9,
+        "items": "porélesztő, sütőpor, vaniliáscukor, kókuszreszelék, aromák, darált mák"
+    },
+    {
+        "code": 10,
+        "items": "lisztek, rizs, bulgur, kuszkusz, étolaj"
+    },
+    {
+        "code": 11,
+        "items": "szalámik, szalonna, kolbász, májkrém, virsli, debreciner, lecsó kolbász"
+    },
+    {
+        "code": 12,
+        "items": "csirkecomb, csirkemell, darálthús, hurka"
+    },
+    {
+        "code": 13,
+        "items": "macska kaja"
+    },
+    {
+        "code": 14,
+        "items": "mosogatószer, WC illatosító, mosigatógép tabletta, mosószer, öblítő"
+    },
+    {
+        "code": 15,
+        "items": "zsebkendő, szalvéta, papírtörlő, WC papír, szemetes zsák, felmosófej, alufólia, frissen tartó fólia"
+    },
+    {
+        "code": 16,
+        "items": "vattakorong, tisztasági betét"
+    },
+    {
+        "code": 17,
+        "items": "szapan, tusfürdő, fogkrém, fogkefe, fogpiszkáló"
+    },
+    {
+        "code": 18,
+        "items": "fagyasztott dogok"
+    },
+    {
+        "code": 19,
+        "items": "chips, sajtostallér, ropi"
+    }
+]

@@ -9,6 +9,7 @@
                 if(isset($_SESSION["user"])){
             ?>
                 <li><a href="profile.php"><?php print($_SESSION["user"]["name"])?></a></li>
+                <li><a href="place_codes.php">Kódok</a></li>
                 <li><a href="logout.php">Kilépés</a></li>
             <?php
                 } else {

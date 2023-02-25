@@ -100,7 +100,7 @@ switch(true) {
             $mail = new PHPMailer(true);
             try {
                 $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-                $mail->isSMTP();                                      // Set mailer to use SMTP
+                $mail->isSMTP();//!!!! COMMENT THIS LINE OUT ON SERVER,  IT ONLY WORKS ON LOCALHOST       // Set mailer to use SMTP
                 $mail->Host = SMTP_HOST;  // Specify main and backup SMTP servers
                 $mail->SMTPAuth = true;                               // Enable SMTP authentication
                 $mail->Username = SMTP_USERNAME;                 // SMTP username

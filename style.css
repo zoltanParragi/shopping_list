@@ -210,6 +210,25 @@ form>button {
     border: 1px solid black;
 }
 
+/*place codes page:*/
+#placeCodes{
+    width: 50%;
+    min-width: 300px;
+    margin: 0 auto;
+    text-align: left;
+}
+.code {
+    width: 20%;
+    background: rgb(36, 36, 36);
+    color: white;
+    padding: 2px;
+    margin-right: 5px;
+}
+
+.codeLines{
+    margin: 15px 0;
+}
+
 
 
 
