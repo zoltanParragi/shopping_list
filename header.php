@@ -31,6 +31,7 @@
             if(isset($_SESSION["user"])){
         ?>
             <div><a href="profile.php"><?php print($_SESSION["user"]["name"])?></a></div>
+            <div><a href="place_codes.php">Kódok</a></div>
             <div><a href="logout.php">Kilépés</a></div>
         <?php
             } else {

@@ -26,6 +26,7 @@
             <?php print($_SESSION["flash"]["activate"]['value'])?>
         </section>
     </main>
+    <?php include 'footer.php';?>
     
     <script src="script.js"></script>
 </body>

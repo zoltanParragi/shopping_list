@@ -48,6 +48,7 @@
             <button>Elküld</button>
         </form>
     </main>
+    <?php include 'footer.php';?>
 
     <script src="script.js"></script>
 </body>
