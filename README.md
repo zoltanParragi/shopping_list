@@ -6,7 +6,7 @@ HTML, CSS, PHP használatával készült.
 
 - Regisztráció
 - Bejelentkezés
-- Felhaználói adatok módosítása
+- Felhasználói adatok módosítása
 - Elem hozzáadása a bevásárló listához
 - Elem törlése a bevásárló listából
 - Kosárba helyezett elem elrejtése
