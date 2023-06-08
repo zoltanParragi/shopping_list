@@ -17,4 +17,4 @@ A test@test.test email címmel és az 1111 jelszóval kipróbálható.
 
 ## Regisztráció
 
-Az alklamazás a Mailgun ingyenes SMTP szolgáltatását használja, így regisztráció csak előre meghatározott email címmel lehetséges. 
+Az alklamazás jelenleg a Mailgun ingyenes SMTP szolgáltatását használja, így regisztráció csak előre meghatározott email címmel lehetséges. 
