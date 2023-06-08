@@ -11,6 +11,10 @@ HTML, CSS, PHP használatával készült.
 - Elem törlése a bevásárló listából
 - Kosárba helyezett elem elrejtése
 
-## slkdfsd 
+## Kipróbálás
 
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor similique, explicabo eius ipsa inventore excepturi assumenda eaque! Nam aut itaque ipsum. Optio obcaecati error doloribus aliquam fuga distinctio totam saepe?
+A test@test.test email címmel és az 1111 jelszóval kipróbálható.
+
+## Regisztráció
+
+Az alklamazás a Mailgun ingyenes SMTP szolgáltatását használja, így regisztráció csak előre meghatározott email címmel lehetséges. 
