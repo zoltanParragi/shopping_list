@@ -5,6 +5,8 @@ HTML, CSS, PHP használatával készült.
 ## Funkciók
 
 - Regisztráció
+- Link küldése email fiókba a regisztráció megerősítéséhez
+- Regisztráció megerősítése a kapott link segítségével
 - Bejelentkezés
 - Felhasználói adatok módosítása
 - Elem hozzáadása a bevásárló listához
