@@ -1,8 +1,10 @@
 <?php
     session_start();
+    
     require('config.php');
-    ini_set("display_errors", 1);
-    error_reporting(E_ALL);
+
+    ini_set("display_errors", 0);
+    error_reporting(~E_ALL);
 
     $user = mysqli_fetch_assoc(mysqli_query($connection, "select * from users where id = '".$_SESSION["user"]["id"]."'"));
   
@@ -13,8 +15,6 @@
             print($user[$key]??'');
         }
     }
-    //exit(print_r($user , 1));
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
