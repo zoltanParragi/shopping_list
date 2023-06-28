@@ -3,17 +3,8 @@
 
     require('config.php');
 
-    ini_set("display_errors", 1);
-    error_reporting(E_ALL);
-    /* 
-        ini_set("display_errors", 0);
-        error_reporting(~E_ALL);
-    */
-
-    /* $connection = mysqli_connect("localhost", "root", "1234", "test");
-    if($err = mysqli_connect_error()) {
-        exit($err);
-    } */
+    ini_set("display_errors", 0);
+    error_reporting(~E_ALL);
     
     $list = mysqli_fetch_all(mysqli_query($connection, "select * from list"));
 ?>

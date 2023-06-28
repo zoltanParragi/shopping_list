@@ -2,10 +2,6 @@
     session_start();
     ini_set("display_errors", 0);
     error_reporting(~E_ALL);
-    /* 
-        ini_set("display_errors", 1);
-        error_reporting(E_ALL);
-    */
 ?>
 <!DOCTYPE html>
 <html lang="en">

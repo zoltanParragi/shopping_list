@@ -1,24 +1,29 @@
 <?php
 session_start();
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
+
+ini_set("display_errors", 0);
+error_reporting(~E_ALL);
+
 require('config.php');
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
 require 'vendor/autoload.php';
+
 $post= "";
 $get= "";
 $description = "";
 $referrer_page = "";
 $id_to_del = "";
+
 $post = $_POST;
 extract($post); 
-//user: $name, $email, $password, $password_confirm, $referrer_page = register
-//list item: $description, $place_code,  $referrer_page = index
+
 $get = $_GET;
 extract($get);
-// $referrer_page, $id_to_del
+
 switch(true) {
     case ($referrer_page === "index" and $description !== ""):
         mysqli_query($connection, "insert into list (description, place_code) values('$description', '$place_code')");
@@ -67,7 +72,7 @@ switch(true) {
             $email = mysqli_real_escape_string($connection, $email);
             $name = mysqli_real_escape_string($connection, $name);
             $token = md5(rand(111111, 999999).time());
-            //while() {} token összehasonlítása az adatbáziban taláhatókkal, út token generálás az egyediségig 
+            
             mysqli_query($connection, "insert into users (name, email, password, verification_token) values('$name', '$email', '$password', '$token')");
             if($err = mysqli_error($connection)){
                 exit($err);
@@ -76,17 +81,17 @@ switch(true) {
             $mail = new PHPMailer(true);
             try {
                 $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-                //$mail->isSMTP();  //!!!! COMMENT THIS LINE OUT ON SERVER,  IT ONLY WORKS ON LOCALHOST       // Set mailer to use SMTP
-                $mail->Host = SMTP_HOST;  // Specify main and backup SMTP servers
-                $mail->SMTPAuth = true;                               // Enable SMTP authentication
-                $mail->Username = SMTP_USERNAME;                 // SMTP username
-                $mail->Password = SMTP_PASSWORD;                           // SMTP password
-                //$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-                $mail->Port = 587;                                    // TCP port to connect to
+
+                $mail->Host = SMTP_HOST; 
+                $mail->SMTPAuth = true;
+                $mail->Username = SMTP_USERNAME;
+                $mail->Password = SMTP_PASSWORD; 
+                
+                $mail->Port = 587;
                 $mail->CharSet = 'UTF-8';
                 $mail->setFrom( 'zparragi@gmail.com' , 'Parragi Zoltán' );
-                $mail->addAddress($email, $name);     // Add a recipient
-                $mail->isHTML(true);                                  // Set email format to HTML
+                $mail->addAddress($email, $name);
+                $mail->isHTML(true); 
                 $mail->Subject = 'Regisztráció visszaigazolás';
                 $mail->Body    = nl2br("Kedves $name!
                     Ezzel az email címmel regisztrációt kezdeményeztek a parragizoltan.hu/bevasarlas oldalon ".date('Y.m.d , H:i:s')."-kor.
@@ -104,6 +109,7 @@ switch(true) {
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
             //-- sending email end ---
+
             $_SESSION["flash"]["register"]["msg"] = ['value' => ['Sikeres regisztráció. <br><br> A regisztráció megerősítéséhez kattints az emailben kapott linkre.'], 'type' => 'successmsg'];
         }
         header("location: ".$referrer_page.".php");
@@ -130,17 +136,17 @@ switch(true) {
                     $_SESSION["flash"]["login"]["post"] = $post;
                     $_SESSION["flash"]["login"]["msg"] = ['value' => ['Hibás belépési adatok.'], 'type' => 'errormsg'];
                     header("location: ".$referrer_page.".php");
-                    exit; // OR return;
+                    exit;
                 } else {
                     if($is_email_verified) {
                         $_SESSION["user"] = $user_in_db;
                         header("location: index.php");
-                        exit; // OR return;
+                        exit;
                     } else {
                         $_SESSION["flash"]["login"]["post"] = $post;
                         $_SESSION["flash"]["login"]["msg"] = ['value' => ['Még nem erősítetted meg a regisztrációd. <br><br> A regisztráció megerősítéséhez kattints az e-mailben kapott linkre.'], 'type' => 'errormsg'];
                         header("location: ".$referrer_page.".php");
-                        exit; // OR return;
+                        exit;
                     }
                 }
             }
